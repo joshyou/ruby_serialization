@@ -1,6 +1,6 @@
 require "yaml"
 
-class Game
+class Hangman
     def initialize
       @word = get_word
       @error_count = 0
@@ -110,5 +110,5 @@ class Game
 
 end
 
-my_game = Game.new
+my_game = Hangman.new
 my_game.begin_game
