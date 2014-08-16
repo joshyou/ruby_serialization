@@ -31,7 +31,7 @@ class Hangman
       File.open("saved.yaml", "w") do |f|
           f.puts yaml
       end
-      puts "game saved"
+      puts "\n" + "game saved"
     end
 
     def load_game
@@ -39,7 +39,7 @@ class Hangman
       yaml = savefile.read()
       savefile.close
       saved_game = YAML::load(yaml)
-      puts "game loaded"
+      puts "\n" + "game loaded"
       @word = saved_game[:word]
       @display_string = saved_game[:display_string]
       @guessed = saved_game[:guessed]
@@ -60,9 +60,9 @@ class Hangman
     def play
         
       while @error_count < 7
-        puts @display_string
+        puts "\n" + @display_string
         puts "incorrect guesses: #{@wrong_guesses}"
-        puts "\n" + "guess a letter (#{7 - @error_count} mistakes remaining)"
+        puts "guess a letter (#{7 - @error_count} mistakes remaining)"
         puts "enter save to save game"
         guess = gets.chomp.downcase
           
@@ -72,13 +72,13 @@ class Hangman
         end
           
         while guess.length != 1
-          puts "invalid input, must be one character"
+          puts "\n" + "invalid input, must be one character"
           guess = gets.chomp.downcase
           break unless guess.length != 1
         end
 
         while @guesses.include? (guess)
-          puts "already guessed this letter, guess again"
+          puts "\n" + "already guessed this letter, guess again"
           guess = gets.chomp.downcase
           break unless !@guesses.include? (guess)
         end
@@ -86,7 +86,7 @@ class Hangman
         @guesses += guess  
 
         if @word.include? (guess)
-          puts "guess was correct"
+          puts "\n" + "guess was correct"
           @word.split("").each_with_index do |letter, index|
             if letter == guess
               @display_string[(index) * 2] = guess
@@ -96,7 +96,7 @@ class Hangman
         else
           @error_count += 1
           @wrong_guesses += guess
-          puts "guess was incorrect"
+          puts "\n" + "guess was incorrect"
         end
 
         if @guessed == @word.length
